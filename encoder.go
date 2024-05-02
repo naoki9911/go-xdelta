@@ -8,7 +8,7 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/nine-lives-later/go-xdelta/xdelta-lib"
+	lib "github.com/nine-lives-later/go-xdelta/xdelta-lib"
 )
 
 type Encoder struct {
@@ -191,7 +191,7 @@ func (enc *Encoder) Process(ctx context.Context) error {
 			}
 
 			n, err := enc.sourceFile.Read(enc.sourceBuffer)
-			if err != nil {
+			if err != nil && err != io.EOF {
 				return fmt.Errorf("Failed to read from FROM/source file: %v", err)
 			}
 			if enc.stats != nil {
